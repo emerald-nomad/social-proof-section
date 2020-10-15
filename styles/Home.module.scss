@@ -1,16 +1,49 @@
+@mixin desktop {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
 .bg-top-container {
   position: fixed;
   top: 0;
+  left: 0;
 }
 
 .bg-bottom-container {
   position: fixed;
+  right: 0;
   bottom: 0;
+}
+
+.bg-top-mobile,
+.bg-bottom-mobile {
+  @include desktop {
+    display: none;
+  }
 }
 
 .bg-top-desktop,
 .bg-bottom-desktop {
   display: none;
+
+  @include desktop {
+    display: block;
+  }
+}
+
+.container {
+  @include desktop {
+    display: grid;
+    grid-template-areas:
+      "header aside"
+      "main   main"
+    ;
+    grid-template-columns: repeat(auto-fill, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    min-height: 100vh;
+    padding: 4em 8em;
+  }
 }
 
 .heading {
@@ -18,6 +51,14 @@
   text-align: center;
   margin-bottom: 1em;
   padding: 0 1em;
+
+  @include desktop {
+    grid-area: header;
+    text-align: left;
+    padding: 0;
+    font-size: 3rem;
+    margin-bottom: 0.25em;
+  }
 }
 
 .sub-heading {
@@ -26,6 +67,18 @@
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 2em;
+
+  @include desktop {
+    text-align: left;
+    font-size: 0.95rem;
+  }
+}
+
+.aside {
+  @include desktop {
+    grid-area: aside;
+    text-align: right;
+  }
 }
 
 .rating {
@@ -35,16 +88,45 @@
   border-radius: 10px;
   margin-bottom: 1em;
 
+  @include desktop {
+    font-size: 1.1rem;
+    text-align: left;
+    width: 31em;
+    margin-left: auto;
+    margin-bottom: 1.25em;
+    display: inline-block;
+
+    &:nth-child(1) {
+      transform: translateX(-6em);
+    }
+
+    &:nth-child(2) {
+      transform: translateX(-3em);
+    }
+  }
+
   &__text {
     display: block;
     color: var(--very-dark-magenta);
     font-weight: 700;
     margin-top: 1em;
+
+    @include desktop {
+      display: inline;
+      margin-left: 2em;
+    }
   }
 }
 
 .main {
   margin: 3em 0 5em;
+
+  @include desktop {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+  }
 }
 
 .testimony {
@@ -53,6 +135,15 @@
   padding: 3em 2em;
   color: var(--light-grayish-magenta);
   border-radius: 8px;
+
+  @include desktop {
+    &:nth-child(1) {
+      transform: translateY(-2em);
+    }
+    &:nth-child(2) {
+      transform: translateY(-1em);
+    }
+  }
 
   &__header {
     margin-bottom: 2.5em;
@@ -84,24 +175,5 @@
 
   &__body {
     font-size: 0.9em;
-  }
-}
-
-
-
-
-
-
-
-
-@media (min-width: 1440px) {
-  .bg-top-mobile,
-  .bg-bottom-mobile {
-    display: none;
-  }
-
-  .bg-top-desktop,
-  .bg-bottom-desktop {
-    display: block;
   }
 }

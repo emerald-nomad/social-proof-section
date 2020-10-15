@@ -9,7 +9,7 @@ export default function Home() {
           </div>
 
           <div className={styles.container}>
-              <header>
+              <header className={styles.header}>
                   <h1 className={styles.heading}>10,000+ of our users love our products.</h1>
                   <h2 className={styles['sub-heading']}>
                       We only provide great products combined with excellent customer service.
@@ -17,7 +17,7 @@ export default function Home() {
                   </h2>
               </header>
 
-              <aside>
+              <aside className={styles.aside}>
                   <div className={styles.rating}>
                       <img src="/images/icon-star.svg" alt="Star Icon"/>
                       <img src="/images/icon-star.svg" alt="Star Icon"/>
